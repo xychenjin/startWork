@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>查看本机域名列表</title>
+	    <link rel="stylesheet" type="text/css" href="http://dd.com.cn/css/bootstrap.min.css"/>
+    <link rel="icon" href="http://localhost/favicon.ico" mce_href="http://localhost/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="http://dd.com.cn/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://dd.com.cn/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://dd.com.cn/js/urls.js"></script>
+    
+    <script type="text/javascript" src="http://dd.com.cn/js/jquery-zclip/jquery.zclip.js"></script>
+	
+	<script type="text/javascript" src="http://dd.com.cn/js/privateers.js"></script>
+    <style>
+
+    </style>
+
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+<body>
+<div class="header"><a href="html/vhosts.html" class="btn">旧版</a><a href="javascript:history.go(0)"
+                                                                    class="btn">刷新</a>
+</div>
+
+<div class="container">
+
+
+    <!--<div class="tabbable">-->
+        <ul class="nav nav-tabs">
+
+            <li class=""><a href="#develop-part" data-toggle="tab">公司开发环境域名</a></li>
+            <li class="active"><a href="#depart-part" data-toggle="tab">云平台工会域名</a></li>
+            <li class=""><a href="#diangj-part" data-toggle="tab">店管家</a></li>
+            <li class=""><a href="#other-part" data-toggle="tab">其他</a></li>
+            <li class=""><a href="#all-part" data-toggle="tab">全部</a></li>
+            <li class=""><a href="#account" data-toggle="tab">账号</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div class="tab-pane " id="develop-part">
+                <h1>公司开发环境域名</h1>
+            </div>
+
+            <div class="tab-pane active" id="depart-part">
+                <h2>云平台工会域名</h2>
+            </div>
+
+			<div class="tab-pane " id="diangj-part">
+                <h2>店管家</h2>
+            </div>
+			
+			<div class="tab-pane " id="other-part">
+                <h2>其他</h2>
+            </div>
+			
+            <div class="tab-pane " id="all-part">
+
+            </div>
+			<div class="tab-pane " id="account">
+
+            </div>
+        </div>
+
+    </div>
+
+<!--</div>-->
+
+<div class="line"></div>
+
+    <hr>
+    <footer>
+        <p class="muted">已经到底拉~</p>
+    </footer>
+</body>
+<script>
+    $('.tabbable ul a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+
+    window.onLoad = loadUrls();
+	loadPrivateers("account");
+</script>
+
+</html>
