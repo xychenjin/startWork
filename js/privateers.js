@@ -13,70 +13,7 @@
 
 //desc 正式环境/开发环境 default 开发环境
 
-//databases [name 用户名, password 密码, port 默认3306, database 数据库名, tableName 表名, conditions 条件等, hostname:主机] 
-var keys = {
-    id: "ID号",
-    url: "Url 域名",
-    username: "用户名",
-    pwd: "密码",
-    _ENV: "环境变量",
-    desc: "适用环境",
-    database: "数据库",
-    port: "端口",
-    tableName: "表名",
-    conditions: "查询条件",
-    keyName: "变量名",
-    keyValue: "变量值",
-    hostname: "连接主机",
-    roles: "角色",
-    permissions: "权限",
-    extensions: "备注"
-};
-
-var privateers = [
-    {
-        url: "http://jim.www.com",
-        username: "user_name[ jimm ]",
-        pwd: "123456",
-        _ENV: [],
-        database: [{database: "dffl_user", tableName: "t_user"}],
-        id: "204",
-        hostname: "10.8.1.14",
-        desc: "开发环境"
-    },
-    {
-        url: "http://m.dongfangfuli.com",
-        username: "user_name[ jimm ]",
-        pwd: "123456",
-        _ENV: [],
-        database: [{database: "dffl_user", tableName: "t_user"}],
-        id: "204",
-        hostname: "10.8.1.14",
-        desc: "开发环境"
-    },
-    {
-        url: "http://jim.psf.com",
-        username: "username[ 用户名1 ]",
-        pwd: "123456",
-        _ENV: [],
-        database: [{database: "dffl_psf_mid", tableName: "t_user", conditions: "mobile=13916184837 AND dffl_user_id=201"}],
-        id: "376196",
-        hostname: "10.8.1.14",
-        desc: "开发环境",
-        extensions:"已弃用",
-    },
-    {
-        url: "http://jim.admin.com",
-        username: "email[ admin@psf.com ]",
-        pwd: "123456",
-        _ENV: [],
-        database: [{database: "dffl_admin", tableName: "users", roles: "超级管理员", permissions: "所有"}],
-        id: "15",
-        hostname: "10.8.1.14",
-        desc: "开发环境"
-    },
-
-];
+//databases [name 用户名, password 密码, port 默认3306, database 数据库名, tableName 表名, conditions 条件等, hostname:主机]
 
 var getTemplate = function (key, val) {
     var getSplitName = function(val) {
