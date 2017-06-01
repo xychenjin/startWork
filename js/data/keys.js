@@ -18,7 +18,7 @@ var keys = {
     url: "Url 域名",
     username: "用户名",
     pwd: "密码",
-    _ENV: "环境变量",
+    env: "环境变量",
     desc: "适用环境",
     database: "数据库",
     port: "端口",

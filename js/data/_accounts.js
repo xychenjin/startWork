@@ -8,7 +8,7 @@
 
 //pwd 密码 string 明文
 
-//_ENV 环境变量 [keyName : keyValue ] Array
+//env 环境变量 [keyName : keyValue ] Array
 
 //desc 正式环境/开发环境 default 开发环境
 
@@ -20,7 +20,7 @@ var privateers = [
         title:"东方福利网-前台",
         username: "user_name[ jimm ]",
         pwd: "123456",
-        _ENV: [],
+        env: [],
         database: [{database: "dffl_user", tableName: "t_user"}],
         id: "204",
         hostname: "10.8.1.14",
@@ -31,7 +31,7 @@ var privateers = [
         title:"东方福利网-H5",
         username: "user_name[ jimm ]",
         pwd: "123456",
-        _ENV: [],
+        env: [],
         database: [{database: "dffl_user", tableName: "t_user"}],
         id: "204",
         hostname: "10.8.1.14",
@@ -41,7 +41,7 @@ var privateers = [
         url: "http://jim.psf.com",
         username: "username[ 用户名1 ]",
         pwd: "123456",
-        _ENV: [],
+        env: [],
         database: [{database: "dffl_psf_mid", tableName: "t_user", conditions: "mobile=13916184837 AND dffl_user_id=201"}],
         id: "376196",
         hostname: "10.8.1.14",
@@ -53,7 +53,7 @@ var privateers = [
         title:"东方福利网-管理后台",
         username: "email[ admin@psf.com ]",
         pwd: "123456",
-        _ENV: [],
+        env: [],
         database: [{database: "dffl_admin", tableName: "users", roles: "超级管理员", permissions: "所有"}],
         id: "15",
         hostname: "10.8.1.14",
@@ -65,10 +65,43 @@ var privateers = [
         username: "email[ 953440772@qq.com ]",
         merchants:"chanjim三方后台测试",
         pwd: "111111",
-        _ENV: [],
+        env: [],
         database: [{database: "dffl_admin", tableName: "merchant_users", roles: "三方店铺管理员", permissions: "部分"}],
         id: "128",
         hostname: "10.8.1.14",
+        desc: "开发环境"
+    },
+    {
+        url: "http://jim.booking.com",
+        title:"东方福利网-400预订系统",
+        username: "email[ 3214 ]",
+        pwd: "123456",
+        env: [],
+        database: [{database: "dffl_admin", tableName: "csb_users", roles: "400账户", permissions: "部分"}],
+        id: "58",
+        hostname: "10.8.1.14",
+        desc: "开发环境"
+    },
+    {
+        url: "http://union-admin.md.com",
+        title:"魔都工会后台",
+        username: "email[ admin@psf.com ]",
+        pwd: "111111",
+        env: [{UNION_NAME: "md"}],
+        database: [{database: "dffl_union", tableName: "users", roles: "超级管理员", permissions: "全部"}],
+        id: "53",
+        hostname: "10.8.1.14",
+        desc: "开发环境"
+    },
+    {
+        url: "http://union.md.dongfangfuli.com",
+        title:"魔都工会前台",
+        username: "email[ zy10001 ]",
+        pwd: "111111",
+        env: [{UNION_NAME: "md", UNION_FRONT_DOMAIN:"union.md.dongfangfuli.com", UNION_SHOP_DOMAIN:"md.dongfangfuli.com"}],
+        database: [{database: "dffl_union", tableName: "t_user"}],
+        //id: "53",
+        hostname: "10.8.1.13",
         desc: "开发环境"
     },
 ];
