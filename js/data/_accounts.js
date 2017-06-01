@@ -17,6 +17,7 @@
 var privateers = [
     {
         url: "http://jim.www.com",
+        title:"东方福利网-前台",
         username: "user_name[ jimm ]",
         pwd: "123456",
         _ENV: [],
@@ -27,6 +28,7 @@ var privateers = [
     },
     {
         url: "http://m.dongfangfuli.com",
+        title:"东方福利网-H5",
         username: "user_name[ jimm ]",
         pwd: "123456",
         _ENV: [],
@@ -48,6 +50,7 @@ var privateers = [
     },
     {
         url: "http://jim.admin.com",
+        title:"东方福利网-管理后台",
         username: "email[ admin@psf.com ]",
         pwd: "123456",
         _ENV: [],
@@ -58,11 +61,12 @@ var privateers = [
     },
     {
         url: "http://jim.merchant.com",
+        title:"东方福利网-三方商户后台",
         username: "email[ 953440772@qq.com ]",
         merchants:"chanjim三方后台测试",
         pwd: "111111",
         _ENV: [],
-        database: [{database: "dffl_admin", tableName: "merchant_users", roles: "三方店铺管理员", permissions: "所有"}],
+        database: [{database: "dffl_admin", tableName: "merchant_users", roles: "三方店铺管理员", permissions: "部分"}],
         id: "128",
         hostname: "10.8.1.14",
         desc: "开发环境"

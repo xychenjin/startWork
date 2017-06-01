@@ -20,10 +20,6 @@ var getTemplate = function (key, val) {
        return $.trim(val).substring($.trim(val).indexOf(" ") + 1, $.trim(val).lastIndexOf(" "));
     };
 
-    var getLinkName = function(val) {
-       return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val + '</a>' : val;
-    };
-
     var getReplaceName = function(val) {
        var splitName = getSplitName(val);
        return splitName ? val.replace(splitName, "<strong class='text-info'>"+ splitName + "</strong>") : val;
@@ -55,32 +51,41 @@ var assemble = function () {
 
 var loadPrivateers = function (id) {
     var loadInfo = function(id, length) {
-        return $("#" + id).append("<h3>一共 <small class='text-danger'>" + length +"</small> 条</h3>");
+        var totalTxt = "<h3 >一共 <small class='text-danger'>" + length +"</small> 条";
+        var buttonTxt = "<a type='button' class='btn btn-danger all-unfold btn-sm'>全部收起</a>&nbsp;"
+        +
+          "<a type='button' class='btn btn-danger all-fold btn-sm' disabled='disabled'>全部展开</a>";
+        var hrTxt = "</h3>";
+        return $("#" + id).append(totalTxt + buttonTxt + hrTxt);
     };
     $("#" + id).append(loadInfo(id, privateers.length));
     $("#" + id).append(assemble());
     doCopy();
     doSelect();
     doHidden();
+    doAllFold();
 };
 
 var getKey = function (key) {
     return keys[key] != undefined ? keys[key] : "其他";
 };
 var getLinkName = function(val) {
-    return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val + '</a>' : val;
+    return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val.substring(7) + '</a>' : val;
 };
 
 var cut = function () {
     if (privateers == undefined || privateers == null) return;
     var context = "<div class='form-horizontal'>";
-    var hiddenBtn = function() {
-       return "<div class = 'row col-md-12'><a class='btn hiddenRow btn-info btn-sm fold'><i class='icon-chevron-down'></i><font>收起</font></a></div>";
+    var hiddenBtn = function(title) {
+       return "<div class = 'row col-md-12 form-inline'><a class='btn hiddenRow btn-info btn-sm fold'><i class='icon-chevron-down'></i><font>收起</font></a>" +
+           " <h3 class='col-md-offset-1'>"
+           + getLinkName(title)
+           + "</h3></div>";
     };
     for (var i in privateers) {
         var privateer = privateers[i];
         context += "<div class= 'form-group'>";
-        context += hiddenBtn();
+        context += hiddenBtn(privateer.title ? privateer.title : privateer.url);
         for (var j in privateer) {
             var items = privateer[j];
             if (typeof items == "object") {
@@ -164,4 +169,36 @@ var doHidden = function() {
     });
 };
 
+var doAllFold = function() {
+    $(".all-unfold, .all-fold").click(function(){
+        var dom = $(this);
+        if (dom.attr("disabled") || ! (dom.hasClass("all-unfold") || dom.hasClass("all-fold"))) {
+            return ;
+        }
+
+        var par = dom.parent();
+        var formGroup = par.next().find(".form-group");
+        if (dom.hasClass("all-unfold")) {
+            formGroup.each(function(index, e){
+                var form = $(this);
+                form.find(".row:gt(0)").hide();
+                form.find(".row:eq(0) font").html("展开");
+                form.find(".row:eq(0) i").attr("class", 'icon-chevron-up');
+            });
+            par.find(".all-fold").removeAttr("disabled");
+            dom.attr("disabled", "disabled");
+        } else {
+        //    console.info(formGroup.length);
+            formGroup.each(function(index, e){
+                var form = $(this);
+                form.find(".row:gt(0)").show();
+                form.find(".row:eq(0) font").html("收起");
+                form.find(".row:eq(0) i").attr("class", 'icon-chevron-down');
+            });
+            par.find(".all-unfold").removeAttr("disabled");
+            dom.attr("disabled", "disabled");
+        }
+
+    });
+  };
 
