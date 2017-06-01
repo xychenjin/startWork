@@ -14,6 +14,24 @@
 //desc 正式环境/开发环境 default 开发环境
 
 //databases [name 用户名, password 密码, port 默认3306, database 数据库名, tableName 表名, conditions 条件等, hostname:主机] 
+var keys = {
+    id: "ID号",
+    url: "Url 域名",
+    username: "用户名",
+    pwd: "密码",
+    _ENV: "环境变量",
+    desc: "适用环境",
+    database: "数据库",
+    port: "端口",
+    tableName: "表名",
+    conditions: "查询条件",
+    keyName: "变量名",
+    keyValue: "变量值",
+    hostname: "连接主机",
+    roles: "角色",
+    permissions: "权限",
+    extensions: "备注"
+};
 
 var privateers = [
     {
@@ -35,35 +53,63 @@ var privateers = [
         id: "204",
         hostname: "10.8.1.14",
         desc: "开发环境"
-    }
+    },
+    {
+        url: "http://jim.psf.com",
+        username: "username[ 用户名1 ]",
+        pwd: "123456",
+        _ENV: [],
+        database: [{database: "dffl_psf_mid", tableName: "t_user", conditions: "mobile=13916184837 AND dffl_user_id=201"}],
+        id: "376196",
+        hostname: "10.8.1.14",
+        desc: "开发环境",
+        extensions:"已弃用",
+    },
+    {
+        url: "http://jim.admin.com",
+        username: "email[ admin@psf.com ]",
+        pwd: "123456",
+        _ENV: [],
+        database: [{database: "dffl_admin", tableName: "users", roles: "超级管理员", permissions: "所有"}],
+        id: "15",
+        hostname: "10.8.1.14",
+        desc: "开发环境"
+    },
+
 ];
 
-var keys = {
-    id: "ID号",
-    url: "Url 域名",
-    username: "用户名",
-    pwd: "密码",
-    _ENV: "环境变量",
-    desc: "适用环境",
-    database: "数据库",
-    port: "端口",
-    tableName: "表名",
-    conditions: "条件",
-    keyName: "变量名",
-    keyValue: "变量值",
-    hostname: "连接主机"
-};
-
 var getTemplate = function (key, val) {
+    var getSplitName = function(val) {
+       return $.trim(val).substring($.trim(val).indexOf(" ") + 1, $.trim(val).lastIndexOf(" "));
+    };
+
+    var getLinkName = function(val) {
+       return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val + '</a>' : val;
+    };
+
+    var getReplaceName = function(val) {
+       var splitName = getSplitName(val);
+       return splitName ? val.replace(splitName, "<strong class='text-info'>"+ splitName + "</strong>") : val;
+    };
+
+    var formatValue = function(val){
+        return "<span class='col-md-8'>"+ val +"</span>";
+    };
+
     var keyName = getKey(key);
-    var value = val.indexOf("http://") == 0 ? '<a href="' + val + '">' + val + '</a>' : val;
-    if (key == 'username') {
-        var name = $.trim(val).substring($.trim(val).indexOf(" ") + 1, $.trim(val).lastIndexOf(" "));
-        val += name != '' ? '<input class="btn copyText" data-name="' + name + '" type="button" value="复制" />' : '';
-        value = val;
+    var replaceValue = getReplaceName(val);
+    var value = formatValue(replaceValue);
+    if (key == 'url') {
+        value = formatValue(getLinkName(val));
+        value += '<input class="btn selectText btn-default btn-sm un-select" data-url="'+ val +'" type="button" value="选择" />';
     }
 
-    return "<div class = 'row col-md-12'><label class='label-control col-md-2 col-md-offset-1'>" + keyName + " : </label><span class=''>" + value + "</span></div>";
+    if (key == 'username') {
+        var name = getSplitName(val);
+        value += name != '' ? '<input class="btn copyText btn-primary btn-sm" data-name="' + name + '" type="button" value="复制" />' : '';
+    }
+
+    return "<div class = 'row col-md-12'><label class='label-control col-md-2 col-md-offset-1'>" + keyName + " : </label>" + value + "</div>";
 };
 
 var assemble = function () {
@@ -71,33 +117,33 @@ var assemble = function () {
 };
 
 var loadPrivateers = function (id) {
-    $("#" + id).html(assemble());
-
-    $(".copyText").click(function () {
-    $(this).zclip({
-        path: "http://dd.com.cn/js/jquery-zclip/ZeroClipboard.swf",
-        copy: function () {
-            return $(this).data("name");
-        },
-		afterCopy:function() {
-			alert('复制成功');
-			return ;
-		}
-    });
-    
-    });
+    var loadInfo = function(id, length) {
+        return $("#" + id).append("<h3>一共 <small class='text-danger'>" + length +"</small> 条</h3>");
+    };
+    $("#" + id).append(loadInfo(id, privateers.length));
+    $("#" + id).append(assemble());
+    doCopy();
+    doSelect();
+    doHidden();
 };
 
 var getKey = function (key) {
     return keys[key] != undefined ? keys[key] : "其他";
 };
+var getLinkName = function(val) {
+    return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val + '</a>' : val;
+};
 
 var cut = function () {
     if (privateers == undefined || privateers == null) return;
     var context = "<div class='form-horizontal'>";
+    var hiddenBtn = function() {
+       return "<div class = 'row col-md-12'><a class='btn hiddenRow btn-info btn-sm fold'><i class='icon-chevron-down'></i><font>收起</font></a></div>";
+    };
     for (var i in privateers) {
         var privateer = privateers[i];
         context += "<div class= 'form-group'>";
+        context += hiddenBtn();
         for (var j in privateer) {
             var items = privateer[j];
             if (typeof items == "object") {
@@ -116,6 +162,69 @@ var cut = function () {
     }
     context += "</div>";
     return context;
+};
+
+var doCopy = function(){
+    $(".copyText").click(function () {
+        var dom = this;
+        $(this).zclip({
+            path: "http://dd.com.cn/js/jquery-zclip/ZeroClipboard.swf",
+            copy: function () {
+                return $(this).data("name");
+            },
+            beforeCopy: function () {
+                //alert("请再试一次");
+                //$(this).preventDefault();
+            },
+            afterCopy: function () {
+                alert("复制成功");
+                $(this).preventDefault();
+            },
+            clickAfter:function(){
+                if (dom.done == undefined) {
+                    dom.done = true;
+                    alert("拷贝有点傻，请再点一次");
+                }
+            }
+        });
+
+    });
+};
+
+var doSelect =  function() {
+    $(".selectText").click(function(){
+        var dom = $(this);
+        var span = dom.prev("span");
+        if (dom.hasClass("un-select")) {
+            dom.val("取消");
+            dom.removeClass("un-select");
+            span.html(dom.data("url"));
+            span.addClass("text-danger");
+        } else {
+            dom.addClass("un-select");
+            dom.val("选择");
+            span.html(getLinkName(dom.data("url")));
+            span.removeClass("text-danger");
+        }
+    });
+};
+
+var doHidden = function() {
+    $(".hiddenRow").click(function(){
+        var dom = $(this);
+        var par = dom.parent().nextAll();
+        if (dom.hasClass("fold")) {
+            par.hide();
+            dom.find("i").attr("class", 'icon-chevron-up');
+            dom.find("font").html("展开");
+            dom.removeClass("fold");
+        } else {
+            par.show();
+            dom.find("i").attr("class", 'icon-chevron-down');
+            dom.find("font").html("收起");
+            dom.addClass("fold");
+        }
+    });
 };
 
 

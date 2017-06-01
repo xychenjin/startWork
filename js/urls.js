@@ -108,12 +108,16 @@
             }
 
         }
-
-        var output = function (data, id) {
+		var loadInfo = function(id, length) {
+			return $("#" + id).append("<h3>一共 <small class='text-danger'>" + length +"</small> 条</h3>");
+		};
+		
+        var output = function (data, id, loadHeader) {
+			if(loadHeader) loadInfo(id, data.length);
             for (var i in data)
                 $("#" + id).append(data[i]);
         };
 
-        output(all, "all-part");
+        output(all, "all-part", true);
     }
 	
