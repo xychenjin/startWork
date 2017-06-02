@@ -72,6 +72,18 @@ var privateers = [
         desc: "开发环境"
     },
     {
+        url: "http://jim.merchant.com",
+        title:"东方福利网-三方商户后台",
+        username: "email[ admin ]",
+        merchants:"易果生鲜API",
+        pwd: "123456",
+        env: [],
+        database: [{database: "dffl_admin", tableName: "merchant_users", roles: "三方店铺管理员", permissions: "部分"}],
+        id: "422",
+        hostname: "10.8.1.14",
+        desc: "开发环境"
+    },
+    {
         url: "http://jim.booking.com",
         title:"东方福利网-400预订系统",
         username: "email[ 3214 ]",
@@ -192,4 +204,25 @@ var privateers = [
     //    hostname: "10.8.1.14",
     //    desc: "开发环境"
     //},
+    {
+        url: "http://www.diangj.cn",
+        title:"店管家H5-线上",
+        username: "nickname[ Big Jim ]",
+        //pwd: "111111",
+        database: [{database: "diangj", tableName: "diangj_customer"}],
+        id: "2",
+        hostname: "121.41.13.0",
+        desc: "开发环境",
+        extensions:"微信用户",
+    },
+    {
+        url: "http://sh.diangj.cn",
+        title:"店管家H5-商户",
+        username: "username[ 沙县小吃 ]",
+        pwd: "123456",
+        database: [{database: "diangj", tableName: "diangj_merchants"}],
+        id: "5",
+        hostname: "121.41.13.0",
+        desc: "开发环境"
+    },
 ];
