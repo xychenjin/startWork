@@ -167,7 +167,7 @@ var doCopy = function () {
                 //$(this).preventDefault();
             },
             afterCopy: function () {
-                alert("复制成功");
+                alert($(this).data("name"));
                 $(this).preventDefault();
             },
             clickAfter: function () {

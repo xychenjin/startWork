@@ -143,7 +143,7 @@ var privateers = [
         username: "email[ bwm1 ]",
         pwd: "111111",
         env: [{UNION_NAME: "bmw"}],
-        database: [{database: "dffl_union", tableName: "users", roles: "宝马工会管理员", permissions: "全部", conditions:"union=2"}],
+        database: [{database: "dffl_union", tableName: "users", roles: "宝马工会管理员", permissions: "全部", conditions:"union_id=2"}],
         id: "7",
         hostname: "10.8.1.14",
         desc: "开发环境"
