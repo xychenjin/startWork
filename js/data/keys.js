@@ -31,5 +31,6 @@ var keys = {
     permissions: "权限",
     extensions: "备注",
     merchants:"商家",
-    title:'网站',
+    title:"网站",
+    SQL:"SQL查询"
 };

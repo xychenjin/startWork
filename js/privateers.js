@@ -76,20 +76,62 @@ var getKey = function (key) {
 var getLinkName = function (val) {
     return val.indexOf("http://") == 0 ? '<a href="' + val + '" target="_blank">' + val.substring(7) + '</a>' : val;
 };
+var getHiddenBtn = function (title) {
+    return "<div class = 'row col-md-12 form-inline'><a class='btn hiddenRow btn-info btn-sm fold'><i class='icon-chevron-down'></i><font>收起</font></a>" +
+        " <h3 class='col-md-offset-1'>"
+        + getLinkName(title)
+        + "</h3></div>";
+};
+/**
+ * 构造查询数据库SQL语句
+ *
+ * @param database 数据库 string
+ * @param table 表 string
+ * @param where 条件 mixed
+ * @param column mixed
+ *
+ * @returns {string}
+ */
+var getSqlQuery = function (database, table, where, column) {
+    var col = column ? column : "*";
+    return "SELECT " + col + " FROM `" + database + "`.`" + table + "` WHERE " + where;
+};
+
+var getQueryByItem = function (items) {
+    if (items == undefined || items == null) return '';
+    var context = '';
+    console.info(items);
+    for (var key in items) {
+        var item = items[key];
+
+        if (items.database == undefined || items.database == null) continue;
+        var where = '';
+        if (items.id) {
+            where += where ? " AND id=" + items.id : " id=" + items.id;
+        }
+
+        if (typeof item == "object") {
+            if (item == null) continue;
+            for (var k in item) {
+                var values = item[k];
+                if (values.database == undefined || values.tableName == undefined) continue;
+                var conditions = values.conditions ? values.conditions : '';
+                where += where && conditions ? " AND " + conditions : conditions;
+                var dd = getSqlQuery(values.database, values.tableName, where);
+                context += getTemplate("SQL", dd);
+            }
+        }
+    }
+    return context;
+};
 
 var cut = function () {
     if (privateers == undefined || privateers == null) return;
     var context = "<div class='form-horizontal'>";
-    var hiddenBtn = function (title) {
-        return "<div class = 'row col-md-12 form-inline'><a class='btn hiddenRow btn-info btn-sm fold'><i class='icon-chevron-down'></i><font>收起</font></a>" +
-            " <h3 class='col-md-offset-1'>"
-            + getLinkName(title)
-            + "</h3></div>";
-    };
     for (var i in privateers) {
         var privateer = privateers[i];
         context += "<div class= 'form-group'>";
-        context += hiddenBtn(privateer.title ? privateer.title : privateer.url);
+        context += getHiddenBtn(privateer.title ? privateer.title : privateer.url);
         for (var j in privateer) {
             var items = privateer[j];
             if (typeof items == "object") {
@@ -97,13 +139,15 @@ var cut = function () {
                 for (var k in items) {
                     var values = items[k];
                     for (var l in values) {
-                        context += getTemplate(l, values[l], j == 'env'? j :'');
+                        context += getTemplate(l, values[l], j == 'env' ? j : '');
                     }
                 }
             } else {
                 context += getTemplate(j, items);
             }
         }
+        context += getQueryByItem(privateer);
+        //console.info(getQueryByItem(items));
         context += "</div>" + (i < parseInt(privateers.length) - 1 ? "<hr>" : "");
     }
     context += "</div>";
