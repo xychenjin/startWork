@@ -1,0 +1,31 @@
+body {
+    margin: 0 auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+.content-white {
+
+}
+
+.wrap {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+.ddclass {
+    width: 100%;
+    height: auto;
+    overflow: scroll;
+}
+
+.ddclass .TabTitle ul, .ddclass .TabContent{
+    height: 400px;
+    overflow: scroll;
+}
+
+.ddclass .TabContent {
+    position: relative;
+    display: inline-block;
+}
