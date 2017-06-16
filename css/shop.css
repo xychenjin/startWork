@@ -29,3 +29,9 @@ body {
     position: relative;
     display: inline-block;
 }
+
+.proTab0_Content {
+    height: auto;
+    display: inline-block;
+    width: 100%;
+}
