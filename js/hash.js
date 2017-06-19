@@ -121,6 +121,10 @@ var Hashes = function (ele) {
         // };
         // hashes.push(boxElement);
         this.lists = hashes;
+
+        this.findByIndex = function(index){
+            return this.lists[index] ? this.lists[index] : null;
+        };
     };
 
     /**

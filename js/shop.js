@@ -182,22 +182,66 @@ function nTabs(thisObj, Num) {
     }
 }
 
-var Coords_Name = ['left', 'top', 'right', 'bottom'];
+$("#proTab0 li").on('click', function () {
+    var dom = $(this);
+    var className = "active";
 
-function inViewPort(iDom, parentDom) {
-    var $_ViewPort = parentDom;//$(parentDom.ownerDocument.defaultView);
-
-    var View_Size = {
-            width: $_ViewPort.width(),
-            height: $_ViewPort.height()
+    var init = {
+        dataId: dom.data("id"),
+        parentElement: dom.parent(),
+        targetParentElement: function () {
+            return $("[data-scroll-box=" + $(this.parentElement).data("scroll-target") + "]");
         },
-        iBcr = iDom.getBoundingClientRect();
+        targetElements: function () {
+            return init.targetParentElement().children()
+        },
+        hashes: null,
+        targetElement: function () {
+            return this.targetParentElement().find("[data-scroll-index=" + this.dataId + "]");
+        },
+        change: function () {
+            init.addClass();
 
-    for (var i = 0; i < Coords_Name.length; i++)
-        if ((iBcr[Coords_Name[i]] >= 0) && (
-                (iBcr.left <= View_Size.width) ||
-                (iBcr.right <= View_Size.height)
-            ))
-            return true;
-    return false;
-}
+            var hash = init.hashes.findByIndex(init.dataId);
+
+            if (hash === null
+                || hash.offsetTop === null
+            ) {
+                return;
+            }
+
+            var top = hash.offsetTop - (init.targetParentElement().offset().top);
+
+            init.targetParentElement().scrollTop(top);
+        },
+
+        removeActiveClass: function () {
+            init.targetActiveElement().removeClass(className);
+        },
+
+        addClass: function () {
+            // init.removeActiveClass();
+            // dom.addClass(className);
+        },
+
+        targetActiveElement: function () {
+            return $(init.parentElement).find("." + className);
+        },
+
+    };
+
+    if (init.targetParentElement().length == 0
+        || init.targetElements().length == 0
+        || init.targetElement().length == 0
+    ) {
+        return;
+    }
+
+    if (!init.hashes
+        || !Hashes
+    ) {
+        init.hashes = Hashes ? Hashes : new Hashes(init.parentElement.attr('id'));
+    }
+
+    init.change();
+});
