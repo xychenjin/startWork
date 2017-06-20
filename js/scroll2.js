@@ -7,6 +7,9 @@ console.info(Hashes);
 console.info(eee.height());
 console.info(eee[0].scrollHeight);
 
+//滚动的对象来源
+var scroll_origin_self = true;
+
 $(document).ready(function () {
     // if (! Hashes) {
     //     var Hashes = new Hashes('proTab0');
@@ -19,7 +22,10 @@ $(document).ready(function () {
     var lastSecondChild = lastChild.prev();
     var lastThirdChild = lastSecondChild.prev();
 
-    $(".TabContent").scroll(function () {
+    $(".TabContent").scroll(function (scrollTop) {
+        console.info(scrollTop);
+
+
         console.info(eee.scrollTop() );
         console.info('第1个元素:'+ firstChild.text() +'的窗口顶部距离：' + firstChild.offset().top
             + ",本来高度：" + firstChild.innerHeight() + ", 相对于父元素的高度top:" + firstChild.position().top

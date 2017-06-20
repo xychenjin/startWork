@@ -167,22 +167,8 @@ function MM_swapImage() { //v3.0
         }
 }
 
-function nTabs(thisObj, Num) {
-    if (thisObj.className == "active")return;
-    var tabObj = thisObj.parentNode.id;
-    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
-    for (i = 0; i < tabList.length; i++) {
-        if (i == Num) {
-            thisObj.className = "active";
-            document.getElementById(tabObj + "_Content" + i).style.display = "block";
-        } else {
-            tabList[i].className = "normal";
-            document.getElementById(tabObj + "_Content" + i).style.display = "none";
-        }
-    }
-}
-
 $("#proTab0 li").on('click', function () {
+
     var dom = $(this);
     var className = "active";
 
@@ -205,14 +191,12 @@ $("#proTab0 li").on('click', function () {
             var hash = init.hashes.findByIndex(init.dataId);
 
             if (hash === null
-                || hash.offsetTop === null
+                || hash.scrollTop === null
             ) {
                 return;
             }
 
-            var top = hash.offsetTop - (init.targetParentElement().offset().top);
-
-            init.targetParentElement().scrollTop(top);
+            init.targetParentElement().animate({scrollTop : hash.scrollTop + "px"}, 1000);
         },
 
         removeActiveClass: function () {
