@@ -1,6 +1,8 @@
 /**
  * Created by jim on 2017/5/31.
  */
+var my_union_name = "md";
+
         var urls = {
             "develop-part": {
                 name: "公司开发环境域名",
@@ -20,8 +22,8 @@
                     ["http://union-admin.md.com", "魔都工会后台"],
                     ["http://union.md.dongfangfuli.com", "魔都工会前台"],
                     ["http://md.dongfangfuli.com", "魔都工会前台-福利商城"],
-                    ["http://m.ua.md.dongfangfuli.com", "魔都工会H5版"],
-                    ["http://m.md.dongfangfuli.com", "魔都工会H5版-福利商城"],
+                    ["http://m.ua.md.dongfangfuli.com/union/md/", "魔都工会H5版"],
+                    ["http://m.md.dongfangfuli.com/union/md/", "魔都工会H5版-福利商城"],
 
                     ["http://union.bmw.dongfangfuli.com", "宝马工会前台"],
                     ["http://bmw.dongfangfuli.com", "宝马工会前台-福利商城"],
@@ -41,6 +43,15 @@
 					["http://teamwork.acceptplay.com", "店管家-Teamwork"],
 					["http://project.acceptplay.com", "店管家-Project"],
 					["http://git.acceptplay.com/", "店管家-Git"],
+				]
+			},
+			"pinexrents-part":{
+				name : "私人顾问",
+				list :[
+					["http://wx.pinexperts.com", "私人顾问H5"],
+					["http://www.pinexrents.com", "私人顾问-线上"],
+					["http://admin.wx.pinexperts.com", "私人顾问H5后台"],
+					["http://admin.pinexperts.com", "私人顾问后台"],
 				]
 			},
 			"other-part":{
@@ -88,8 +99,10 @@
     var loadUrls = function () {
         var data = urls;
         var all = Array();
+        console.info(data);
         for (var i in data) {
             var id = i;
+
             if (data[i] == undefined || data[i].list == undefined) continue;
             var name = data[i].name == undefined ? "" : data[i].name;
             var lists = data[i].list;
