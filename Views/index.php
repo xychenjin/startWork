@@ -18,6 +18,28 @@
 
 
     //CTRL + SHIFT + K push代码
+
+class MyException extends Exception
+{
+    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
+    public function my(){
+        $str = '';
+
+
+        if (empty($aaa) || empty($bbb)) {
+        }
+        $str .= 'bbb';
+
+        $str .= 'ccc';
+
+    }
+
+}
+
 ?>
 
 
