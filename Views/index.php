@@ -19,6 +19,9 @@
 
     //CTRL + SHIFT + K push代码
 
+
+    //both changed this file when I want to commit then. 提交时当两个人都改了本地同一个文件
+
 class MyException extends Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
