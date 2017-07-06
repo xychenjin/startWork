@@ -12,5 +12,29 @@
     $c = $b;
     $b = 666;
     echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
+    echo $a,$b,$c;
 
+$arr = [];
 
+$isDone = false;
+
+class laravel
+{
+    public function __construct() {
+        //TODO
+    }
+}
