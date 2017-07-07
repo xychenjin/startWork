@@ -1,7 +1,7 @@
 /**
  * Created by jim on 2017/5/2.
  */
-
+var dddd= true;
 $(function () {
     var money = parseFloat($("#money").attr("data"));
     if (money == 0) {

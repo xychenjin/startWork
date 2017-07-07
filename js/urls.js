@@ -2,7 +2,7 @@
  * Created by jim on 2017/5/31.
  */
 var my_union_name = "md";
-
+var my_test_js = 124444;
         var urls = {
             "develop-part": {
                 name: "公司开发环境域名",

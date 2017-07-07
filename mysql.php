@@ -9,10 +9,10 @@ if (!session_id()) {
     session_start();
 }
 
-$con = mysqli_connect('localhost', 'jim', '123456', '', 3306) or die(0);
-$res = mysqli_query($con, 'select version()');
+//$con = mysqli_connect('localhost', 'jim', '123456', '', 3306) or die(0);
+//$res = mysqli_query($con, 'select version()');
 
-if (is_object($con) && $version = mysqli_fetch_array($res)) {
+if (isset($con) && is_object($con) && $version = mysqli_fetch_array($res)) {
     $timeSql = mysqli_query($con, 'select current_timestamp()');
     $time = mysqli_fetch_row($timeSql);
     $currentUserSql = mysqli_query($con, 'select user()');
@@ -36,6 +36,30 @@ if (is_object($con) && $version = mysqli_fetch_array($res)) {
     echo "<style>body{overflow-x: hidden;margin: 0 auto;height: auto;width: 100%; } li{display: inline-block;width: 100%;text-align: left;height:auto;word-break: break-all;}li:nth-child(odd){background: #EFEFF4;}</style>";
 } else {
     echo "<h1>数据库连接失败！请重试</h1>";
+
 }
 
-mysqli_close($con);
+//mysqli_close($con);
+
+
+
+
+
+
+
+
+?>
+
+
+<p>
+    this is the short tag mark.
+</p>
+
+<div class="wrap">
+</div>
+<div id="row"><?php echo "张三"; ?></div>
+
+
+<?= 'hhhhhhhhhhhh' ?>
+
+
